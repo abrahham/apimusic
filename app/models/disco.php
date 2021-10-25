@@ -6,8 +6,9 @@
 		private $genero_id;
 		public function __construct() {
 			echo "<p>estás en el archivo de discos</p>";
-		}
-		public function test() {
-			echo "método test ejecutado"; //borrar
+		}		
+		public function getAll() {
+			$arre = array("id" => 1, "nombre" => "Pelagial");
+			return $arre;
 		}
 	}
