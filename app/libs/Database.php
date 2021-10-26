@@ -6,10 +6,10 @@
 		private $contr;
 		private $con;
 		public function __construct() {
-			$this->host = .env("host");
-			$this->dbname = .env("dbname");
-			$this->usr = .env("usr");
-			$this->contr = .env("contr");
+			$this->host = $_ENV["DBHOST"];
+			$this->dbname = $_ENV["DBNAME"];
+			$this->usr = $_ENV["DBUSER"];
+			$this->contr = $_ENV["DBCONTR"];
 		}		
 		public function connectar() {
 			$this->con = null;

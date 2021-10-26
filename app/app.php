@@ -3,6 +3,7 @@
 		private $url;
 		private $api;
 		private $metodo;
+		private $param;
 		private $seccionesValidas = ["discos","artistas","canciones"];
 		public function __construct() {
 			$params = $this->dividirURL($_GET["url"]);		
@@ -10,7 +11,11 @@
 			$this->api = "Api{$params['seccion']}";
 			$this->api = new $this->api();
 			$this->metodo = $params["metodo"];
-			$this->api->{$this->metodo}();
+			//$this->api->{$this->metodo}();			
+			if($this->metodo == "ver") {
+				$this->param = $params["parametro"];
+				$this->api->{$this->metodo}($this->param);
+			} else $this->api->{$this->metodo}();
 		}
 		public function dividirURL($url) {
 			$url =  isset($_GET['url']) ? $_GET['url'] : "artistas";
@@ -22,6 +27,8 @@
 					$arreURL["seccion"] = ucfirst($params[0]);
 				if(isset($params[1]))
 					$arreURL["metodo"] = $params[1];
+				if(isset($params[2]))
+					$arreURL["parametro"] = $params[2];
 				return $arreURL;
 			} else return array("seccion" => "artistas", "metodo" => "ver");
 		}
