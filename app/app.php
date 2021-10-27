@@ -10,8 +10,7 @@
 			include_once "apis/api{$params['seccion']}.php";
 			$this->api = "Api{$params['seccion']}";
 			$this->api = new $this->api();
-			$this->metodo = $params["metodo"];
-			//$this->api->{$this->metodo}();			
+			$this->metodo = $params["metodo"];			
 			if($this->metodo == "ver") {
 				$this->param = $params["parametro"];
 				$this->api->{$this->metodo}($this->param);

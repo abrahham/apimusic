@@ -17,4 +17,27 @@
 			$this->encabezados("GET",false);
 			echo json_encode($arre);
 		}
+		public function agregar() {
+			$this->encabezados("POST",true);
+			$data = json_decode(file_get_contents("php://input"), true);
+			$this->modelo->nombre = $data["nombre"];
+			$this->modelo->artista_id = $data["artistaId"];
+			$res = $this->modelo->create();
+			echo json_encode(($res)
+					? array("mensaje" => "Se ha agregado el disco.") 
+					: array("mensaje" => "Ha habido problemas al intentar agregar el disco dado.")
+			);
+		}
+		public function cambiar() {
+			$this->encabezados("PUT",true);
+			$data = json_decode(file_get_contents("php://input"), true);
+			$this->modelo->id = $data["id"];			
+			$this->modelo->nombre = $data["nombre"];
+			$this->modelo->artista_id = $data["artistaId"];
+			$res = $this->modelo->update();
+			echo json_encode(($res)
+					? array("mensaje" => "Se ha modificado el disco.") 
+					: array("mensaje" => "Ha habido problemas al intentar modificar el disco dado.")
+			);
+		}
 	}
