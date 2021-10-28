@@ -40,4 +40,13 @@
 					: array("mensaje" => "Ha habido problemas al intentar modificar el disco dado.")
 			);
 		}
+		public function eliminar($id) {
+			$this->encabezados("DELETE",true);
+			$this->modelo->id = $id;
+			$res = $this->modelo->delete();
+			echo json_encode(($res)
+					? array("mensaje" => "Se ha eliminado el disco.") 
+					: array("mensaje" => "Ha habido problemas al intentar eliminar el disco dado.")
+			);
+		}
 	}

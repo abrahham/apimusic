@@ -11,7 +11,7 @@
 			$this->api = "Api{$params['seccion']}";
 			$this->api = new $this->api();
 			$this->metodo = $params["metodo"];			
-			if($this->metodo == "ver") {
+			if($this->metodo == "ver" || $this->metodo == "eliminar") {
 				$this->param = $params["parametro"];
 				$this->api->{$this->metodo}($this->param);
 			} else $this->api->{$this->metodo}();
