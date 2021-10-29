@@ -3,7 +3,7 @@
 	class Artista {
 		private $tabla = "artista"; //cambiar a artistas
 		public $id;
-		private $nombre;
+		public $nombre;
 		private $db;
 		public function __construct() {
 			$this->db = new Database();
@@ -24,5 +24,27 @@
 			$stm->execute();
 			$arre = $stm->fetch(PDO::FETCH_ASSOC);
 			return $arre;
+		}
+		public function create() {
+			$dbcon = $this->db->connectar();
+			$query = "INSERT INTO {$this->tabla}(nombre) VALUES(:nombre)";
+			$stm = $dbcon->prepare($query);
+			$stm->bindParam(":nombre",$this->nombre);
+			return $stm->execute();		
+		}
+		public function update() {
+			$dbcon = $this->db->connectar();
+			$query = "UPDATE {$this->tabla} SET nombre = :nombre WHERE id = :id";
+			$stm = $dbcon->prepare($query);
+			$stm->bindParam(":nombre",$this->nombre);
+			$stm->bindParam(":id",$this->id);
+			return $stm->execute();	
+		}
+		public function delete() {
+			$dbcon = $this->db->connectar();
+			$query = "DELETE FROM {$this->tabla} WHERE id = :id";
+			$stm = $dbcon->prepare($query);
+			$stm->bindParam(":id",$this->id);
+			return $stm->execute();
 		}
 	}
